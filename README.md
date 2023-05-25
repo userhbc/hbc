@@ -1,2 +1,2 @@
 20233115 hbc
-kookmin Univ.
+kookmin Univ.23

@@ -45,7 +45,7 @@ void loop() {
       analogWrite(PIN_LED, 255);       // LED OFF
   } else {    // In desired Range
       int bright = 0;
-      if(distance <= 200.0){
+      if(distance < 200.0){
         bright = -((255/100.0)*distance);
       }        // LED ON
       else{

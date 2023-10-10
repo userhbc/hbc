@@ -39,17 +39,17 @@ void loop() {
 
   if ((distance == 0.0) || (distance > _DIST_MAX)) {
       distance = _DIST_MAX + 10.0;    // Set Higher Value
-      analogWrite(PIN_LED, 255);       // LED OFF
+      analogWrite(PIN_LED, 255);// LED OFF
   } else if (distance < _DIST_MIN) {
       distance = _DIST_MIN - 10.0;    // Set Lower Value
-      analogWrite(PIN_LED, 255);       // LED OFF
+      analogWrite(PIN_LED, 255); // LED OFF
   } else {    // In desired Range
       int bright = 0;
-      if(distance < 200.0){
-        bright = -((255/100.0)*distance);
+      if(distance < 200){
+        bright = -((255/100.0)*(distance - 100.0)) + 255;
       }        // LED ON
       else{
-        bright = ((255/100.0)*distance);
+        bright = ((255/100.0)*(distance - 100.0)) - 255;
       } 
       analogWrite(PIN_LED, bright);     
   }

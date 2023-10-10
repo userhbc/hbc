@@ -5,7 +5,7 @@
 
 // configurable parameters
 #define SND_VEL 346.0     // sound velocity at 24 celsius degree (unit: m/sec)
-#define INTERVAL 25       // sampling interval (unit: msec)
+#define INTERVAL 25      // sampling interval (unit: msec)
 #define PULSE_DURATION 10 // ultra-sound Pulse Duration (unit: usec)
 #define _DIST_MIN 100.0   // minimum distance to be measured (unit: mm)
 #define _DIST_MAX 300.0   // maximum distance to be measured (unit: mm)
@@ -23,7 +23,7 @@ void setup() {
   digitalWrite(PIN_TRIG, LOW);  // turn-off Sonar 
   
   // initialize serial port
-  Serial.begin(57600);
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -39,12 +39,19 @@ void loop() {
 
   if ((distance == 0.0) || (distance > _DIST_MAX)) {
       distance = _DIST_MAX + 10.0;    // Set Higher Value
-      digitalWrite(PIN_LED, 1);       // LED OFF
+      analogWrite(PIN_LED, 255);       // LED OFF
   } else if (distance < _DIST_MIN) {
       distance = _DIST_MIN - 10.0;    // Set Lower Value
-      digitalWrite(PIN_LED, 1);       // LED OFF
+      analogWrite(PIN_LED, 255);       // LED OFF
   } else {    // In desired Range
-      digitalWrite(PIN_LED, 0);       // LED ON      
+      int bright = 0;
+      if(distance <= 200.0){
+        bright = -((255/100.0)*distance);
+      }        // LED ON
+      else{
+        bright = ((255/100.0)*distance);
+      } 
+      analogWrite(PIN_LED, bright);     
   }
 
   // output the distance to the serial port

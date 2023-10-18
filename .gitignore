@@ -1,5 +1,0 @@
-#ignore all .log files
-*.log
-
-# only ignore the *.in files in the current directory
-/*.in
